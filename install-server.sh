@@ -39,7 +39,7 @@ echo "CREATE DATABASE ${DBNAME} OWNER ${USERNAME}" | sudo -u postgres psql
 
 sudo -u ${USERNAME} hive --config-file ${CONFIGFILE} db schema
 
-echo "d /run/${INSTANCE} 0755 ${USERNAME} ${USERNAME} -" > /usr/lib/tmpfiles.d/${INSTANCE}.conf
+echo "d /run/${INSTANCE} 0755 ${USERNAME} ${USERNAME} -" > /etc/tmpfiles.d/${INSTANCE}.conf
 
 
 echo "

@@ -9,10 +9,25 @@ A set of REST APIs to create shared lists which can manipulated by anyone.
 ### Server
 
 
+#### Installation
+
 ```bash
 pip install -e .
 hive db create -m
+```
+
+
+#### Quickstart
+
+```bash
 ./dev.sh
+```
+
+
+#### Systemd
+
+```bash
+sudo ./install-server.sh
 ```
 
 #### Run tests
