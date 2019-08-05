@@ -1,6 +1,6 @@
-from hive import SharedLists
+from hive import Hive
 
-app = SharedLists()
+app = Hive()
 app.configure()
 app.initialize_orm()
 

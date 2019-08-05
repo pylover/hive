@@ -7,7 +7,7 @@ from .authentication import Authenticator
 from .cli import UserCommand
 
 
-class SharedLists(Application):
+class Hive(Application):
     __authenticator__ = Authenticator()
     __configuration__ = '''
       db:

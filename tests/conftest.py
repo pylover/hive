@@ -3,7 +3,7 @@ from os import path
 from restfulpy.testing import ApplicableTestCase
 from restfulpy.principal import JWTPrincipal
 
-from hive import SharedLists
+from hive import Hive
 from hive.models import User
 
 
@@ -12,7 +12,7 @@ DATA_DIRECTORY = path.abspath(path.join(HERE, '../../data'))
 
 
 class RESTAPITestCase(ApplicableTestCase):
-    __application__ = SharedLists()
+    __application__ = Hive()
     __story_directory__ = path.join(DATA_DIRECTORY, 'stories')
     __api_documentation_directory__ = path.join(DATA_DIRECTORY, 'markdown')
     __metadata__ = {

@@ -1,9 +1,9 @@
 
-from .application import SharedLists
+from .application import Hive
 
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 
-server_main = lambda: SharedLists().cli_main()
+server_main = lambda: Hive().cli_main()
 
