@@ -24,13 +24,19 @@ hive db create -m
 ```
 
 
-#### Systemd
+### Ubuntu
+
+There is an installation script to install configure the systemd script and
+appropriate postgresql db.
+
+Take a look inside and if you know what you the doing, then run the script as
+root!
 
 ```bash
 sudo ./install-server.sh
 ```
 
-#### Run tests
+### Run tests
 
 
 ```bash
