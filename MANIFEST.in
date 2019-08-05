@@ -1,0 +1,4 @@
+include hive/alembic.ini
+include hive/migration/**/*.py
+include install-server.sh
+

@@ -1,0 +1,33 @@
+env:
+  global:
+    - COMMIT_AUTHOR_EMAIL: vahid.mardani@gmail.com
+language: python
+python: 3.6
+branches:
+  only:
+  - master
+  - develop
+  - nightly
+  - ci
+  - /^v([1-9]\d*!)?(0|[1-9]\d*)(\.(0|[1-9]\d*))*((a|b|rc)(0|[1-9]\d*))?(\.post(0|[1-9]\d*))?(\.dev(0|[1-9]\d*))?$/
+addons:
+  apt:
+    sources:
+      - precise-pgdg-9.5
+    packages:
+      - postgresql-9.5
+      - postgresql-contrib-9.5
+      - libpq-dev
+  postgresql: 9.5
+
+services:
+  - redis-server
+
+install:
+  - pip install -U pip
+  - pip install git+https://github.com/Carrene/restfulpy.git
+  - pip install -r requirements-ci.txt
+  - pip install -ve .
+script: py.test --cov=hive tests
+after_success: 
+  - coveralls
