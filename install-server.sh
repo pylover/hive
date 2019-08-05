@@ -16,7 +16,7 @@ PIP=$(which pip3.6)
 curl https://bootstrap.pypa.io/get-pip.py | $PYTHON
 useradd -r ${USERNAME}
 
-echo "CREATE USER ${USERNAME}" | sudo -u postgres psql
+echo "CREATE USER ${USERNAME}" | sudo -Hu postgres psql
 
 $PIP install .
 
@@ -34,7 +34,7 @@ jwt:
 " > ${CONFIGFILE}
 
 
-echo "CREATE DATABASE ${DBNAME} OWNER ${USERNAME}" | sudo -u postgres psql
+echo "CREATE DATABASE ${DBNAME} OWNER ${USERNAME}" | sudo -Hu postgres psql
 
 
 sudo -u ${USERNAME} hive --config-file ${CONFIGFILE} db schema
@@ -87,9 +87,9 @@ server {
     listen 443 ssl http2;
 
     location ~ ^/apiv1/(?<url>.*) {
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
       proxy_redirect off;
-      proxy_pass http://${INSTANCE}_api/$url;
+      proxy_pass http://${INSTANCE}_api/\$url;
     }
 }
 " > /etc/nginx/sites-available/${INSTANCE}.conf
