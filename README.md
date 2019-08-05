@@ -15,9 +15,16 @@ hive db create -m
 ./dev.sh
 ```
 
+#### Run tests
+
+
+```bash
+pip install requirements-dev.txt
+pytest
+```
+
 
 ### Client
 
-```bash
-bee -h
-```
+Checkout https://github.com/pylover/bee
+

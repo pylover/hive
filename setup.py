@@ -12,7 +12,6 @@ with open(join(dirname(__file__), 'hive', '__init__.py')) as v_file:
 
 dependencies = [
     'restfulpy >= 3.4, < 4',
-    'easycli >= 1.4, < 2',
 
     # Deployment
     'gunicorn',
@@ -29,7 +28,6 @@ setup(
     entry_points={
         'console_scripts': [
             'hive = hive:server_main',
-            'bee = hive:client_main'
         ]
     }
 )
