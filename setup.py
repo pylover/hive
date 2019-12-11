@@ -12,6 +12,7 @@ with open(join(dirname(__file__), 'hive', '__init__.py')) as v_file:
 
 dependencies = [
     'restfulpy >= 3.4, < 4',
+    'easycli >= 1.4.3, < 2',
 
     # Deployment
     'gunicorn',

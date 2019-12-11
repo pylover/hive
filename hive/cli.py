@@ -8,6 +8,7 @@ from .models import User
 
 class AddUserSubCommand(SubCommand):
     __command__ = 'add'
+    __aliases__ = ['a']
     __help__ = 'Add a new user'
     __arguments__ = [
         Argument(
@@ -58,6 +59,7 @@ class PasswdSubCommand(SubCommand):
 
 class UserCommand(SubCommand):
     __command__ = 'user'
+    __aliases__ = ['u']
     __help__ = 'User administration'
     __arguments__ = [
         AddUserSubCommand,
