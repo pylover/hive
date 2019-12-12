@@ -9,25 +9,15 @@ from .cli import UserCommand
 
 class Hive(Application):
     __authenticator__ = Authenticator()
-    __configuration__ = '''
-      db:
-        url: postgresql://postgres:postgres@localhost/sharelists_dev
-        test_url: postgresql://postgres:postgres@localhost/sharelists_test
-        administrative_url: postgresql://postgres:postgres@localhost/postgres
+    __cli_arguments__ = [
+        UserCommand
+    ]
 
-      migration:
-        directory: %(root_path)s/migration
-        ini: %(root_path)s/alembic.ini
-
-    '''
-
-    def __init__(self, application_name='sharelists'):
-        from hive import __version__
+    def __init__(self, name='hive'):
         super().__init__(
-            application_name,
+            name,
             root=Root(),
-            root_path=dirname(__file__),
-            version=__version__
+            path_=dirname(__file__),
         )
 
     def insert_mockup(self, args=None):  # pragma: no cover
@@ -36,7 +26,4 @@ class Hive(Application):
         oscar = User(id='pylover', email='pylover@example.com', password='12345')
         DBSession.add(oscar)
         DBSession.commit()
-
-    def get_cli_arguments(self):
-        return [UserCommand]
 
