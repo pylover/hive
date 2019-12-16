@@ -1,3 +1,4 @@
+import sys
 from getpass import getpass
 
 from restfulpy.orm import DBSession
@@ -31,14 +32,35 @@ class AddUserSubCommand(SubCommand):
         DBSession.commit()
 
 
+class DeleteUserSubCommand(SubCommand):
+    __command__ = 'delete'
+    __aliases__ = ['d']
+    __help__ = 'Delete a user'
+    __arguments__ = [
+        Argument('name', help='Username')
+    ]
+
+    def __call__(self, args):
+        user = DBSession.query(User).filter(User.id == args.name).one_or_none()
+        if user is None:
+            print(f'Invalid username: {args.name}', file=sys.stderr)
+            return 1
+
+        if input(
+            f'Are you sure to delete the user: {user.id}? [N/y] '
+        ).casefold() != 'y'.casefold():
+            print(f'User: {args.name} is not deleted', file=sys.stderr)
+            return 1
+
+        DBSession.delete(user)
+        DBSession.commit()
+
+
 class PasswdSubCommand(SubCommand):
     __command__ = 'passwd'
     __help__ = 'change a user\'s password'
     __arguments__ = [
-        Argument(
-            'name',
-            help='Username',
-        ),
+        Argument('name', help='Username')
     ]
 
     def __call__(self, args):
@@ -63,6 +85,7 @@ class UserCommand(SubCommand):
     __help__ = 'User administration'
     __arguments__ = [
         AddUserSubCommand,
+        DeleteUserSubCommand,
         PasswdSubCommand,
     ]
 
